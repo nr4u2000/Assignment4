@@ -15,15 +15,12 @@ public class GridManager : MonoBehaviour
     private int totalPairs;
     private int matchedPairs;
 
-    private void Start()
+    public void SetGrid(int r, int c)
     {
-        SetGrid();
-    }
-    public void SetGrid()
-    {
-        rows = 2;
-        cols = 3;
+        rows = r;
+        cols = c;
         gridParent.GetComponent<GridLayoutGroup>().constraintCount = rows;
+        gridParent.GetComponent<RectTransform>().anchoredPosition = new Vector2(cols * -62.5f, gridParent.GetComponent<RectTransform>().anchoredPosition.y);
         GenerateGrid();
     }
 
@@ -71,7 +68,7 @@ public class GridManager : MonoBehaviour
 
     void Shuffle(List<int> list)
     {
-        int shuffleCount = Mathf.Clamp(10, 1, 5);
+        int shuffleCount = Mathf.Clamp(GameManager.Instance.currentLevel, 1, 5);
 
         for (int s = 0; s < shuffleCount; s++)
         {
@@ -83,4 +80,13 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public void OnPairMatched()
+    {
+        matchedPairs++;
+
+        if (matchedPairs >= totalPairs)
+        {
+            GameManager.Instance.OnGameCompleted();
+        }
+    }
 }

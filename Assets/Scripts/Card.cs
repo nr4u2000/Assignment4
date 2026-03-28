@@ -26,11 +26,13 @@ public class Card : MonoBehaviour
         if (isFlipped || IsMatched || isAnimating) return;
 
         Flip();
+        GameManager.Instance.OnCardSelected(this);
     }
 
     public void Flip()
     {
         StartCoroutine(FlipRoutine(true));
+        AudioManager.Instance.PlayFlip();
     }
 
     public void FlipBack()
