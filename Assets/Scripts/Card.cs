@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Card : MonoBehaviour
 {
@@ -15,8 +14,9 @@ public class Card : MonoBehaviour
     private bool isFlipped = false;
     private bool isAnimating = false;
 
-    public void Start()
+    public void Setup(int id)
     {
+        Id = id;
         ValueTextfield.text = Id.ToString();
 
     }
